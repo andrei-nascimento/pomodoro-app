@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import Home from './src/pages/Home';
+import Pomodoro from './src/pages/Pomodoro';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Home />
+      <Pomodoro />
       <StatusBar style="auto" />
     </View>
   );
@@ -14,7 +14,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
