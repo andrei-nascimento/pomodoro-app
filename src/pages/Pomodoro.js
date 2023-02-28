@@ -1,16 +1,36 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import CountdownPomodoro from '../components/CountdownPomodoro';
 
 export default function Pomodoro() {
+    
+    const [startCountdown, setStartCountdown] = useState(false);
+
+    const handleStartCountdown = () => {
+        setStartCountdown(true);
+    };
+
     return (
         <View style={styles.container}>
 
-            <View style={styles.clock}>
-                <Text style={styles.time}>25:00</Text>
-            </View>
+            {startCountdown && <CountdownPomodoro startCountdown={startCountdown} /> }
 
-            <TouchableOpacity style={styles.playBtn}>
-                <Icon name='play' size={30} color='#BA4949' />
+            <TouchableOpacity style={styles.playBtn} onPress={handleStartCountdown}>
+                { startCountdown ? 
+                    <Icon 
+                    name='pause' 
+                    size={30} 
+                    color='#BA4949' 
+                    style={styles.pause}
+                    /> 
+                    : 
+                    <Icon 
+                    name='play' 
+                    size={30} 
+                    color='#BA4949' 
+                    />
+                }
             </TouchableOpacity>
 
             <View style={styles.stage}>
@@ -38,23 +58,6 @@ const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: '#BA4949',
     },
-    clock: {
-        width: 227,
-        height: 227,
-        borderRadius: 150,
-        borderWidth: 3.5,
-        borderColor: 'white',
-        backgroundColor: 'transparent',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 72
-    },
-    time: {
-        fontSize: 64,
-        fontWeight: '300',
-        color: 'white',
-    },
     playBtn: {
         backgroundColor: 'white',
         width: 64,
@@ -65,6 +68,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 5,
         marginTop: 40
+    },
+    pause: {
+        marginRight: 4
     },
     stage: {
         flexDirection: 'row',
